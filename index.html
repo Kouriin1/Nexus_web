@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nexus Connect - Sistema de Restaurante</title>
+    <link rel="stylesheet" href="styles.css">
+    <!-- Google Fonts: Poppins para un estilo Soft/Moderno -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Material Icons Round -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Round" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Encabezado Principal -->
+    <header class="main-header">
+        <div class="logo-container">
+            <!-- Logo solicitado -->
+            <div class="logo-wrapper">
+                <img src="img/nexus_logo.jpeg" alt="Nexus Logo" class="logo-header">
+            </div>
+            <span class="logo-text">Nexus Connect</span>
+        </div>
+        <nav class="role-nav">
+            <button class="nav-btn active" onclick="switchView('waiter')" title="Mesonero">
+                <span class="material-icons-round">restaurant_menu</span>
+            </button>
+            <button class="nav-btn" onclick="switchView('kitchen')" title="Cocina">
+                <span class="material-icons-round">soup_kitchen</span>
+            </button>
+            <button class="nav-btn" onclick="switchView('cashier')" title="Caja">
+                <span class="material-icons-round">point_of_sale</span>
+            </button>
+        </nav>
+    </header>
+
+    <!-- Contenedor Principal -->
+    <main class="app-container">
+
+        <!-- ================= VISTA MESONERO ================= -->
+        <section id="waiter-view" class="view active">
+            <div class="waiter-layout">
+                <!-- Panel Izquierdo: Selección -->
+                <div class="menu-selection card-panel">
+                    <div class="panel-header">
+                        <h2><span class="accent-text">Nueva</span> Orden</h2>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="table-select">Seleccionar Mesa</label>
+                        <select id="table-select" class="soft-input">
+                            <option value="1">Mesa 1</option>
+                            <option value="2">Mesa 2</option>
+                            <option value="3">Mesa 3</option>
+                            <option value="4">Mesa 4</option>
+                            <option value="5">Mesa 5</option>
+                            <option value="6">Mesa 6</option>
+                            <option value="7">Mesa 7</option>
+                            <option value="8">Mesa 8</option>
+                            <option value="9">Mesa 9</option>
+                            <option value="10">Mesa 10</option>
+                        </select>
+                    </div>
+
+                    <h3 class="section-label">Categorías</h3>
+                    <div class="categories-container" id="categories-container">
+                        <!-- Categorías generadas por JS -->
+                    </div>
+
+                    <h3 class="section-label">Menú</h3>
+                    <div class="menu-items-grid" id="menu-items-container">
+                        <!-- Items generados por JS -->
+                    </div>
+                </div>
+
+                <!-- Panel Derecho: Resumen de Orden Actual -->
+                <div class="current-order-summary card-panel">
+                    <div class="order-header">
+                        <h3>Mesa <span id="summary-table-num" class="highlight-number">1</span></h3>
+                        <span class="status-indicator">Borrador</span>
+                    </div>
+                    
+                    <div class="order-list-container">
+                        <ul id="current-order-list">
+                            <!-- Items agregados aparecerán aquí -->
+                            <li class="empty-msg">No hay items seleccionados</li>
+                        </ul>
+                    </div>
+
+                    <div class="order-footer">
+                        <div class="order-total">
+                            <span>Total Estimado</span>
+                            <span class="amount">$<span id="current-order-total">0.00</span></span>
+                        </div>
+                        <button class="btn-primary" onclick="sendToKitchen()">ENVIAR A COCINA</button>
+                        <button class="btn-secondary" onclick="clearCurrentOrder()">CANCELAR / LIMPIAR</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= VISTA COCINA (KDS) ================= -->
+        <section id="kitchen-view" class="view">
+            <div class="view-header">
+                <h2>Tablero de Cocina <span class="badge" id="pending-count">0</span></h2>
+            </div>
+            <div class="kitchen-grid" id="kitchen-orders-container">
+                <!-- Tarjetas de pedidos aparecerán aquí -->
+            </div>
+        </section>
+
+        <!-- ================= VISTA CAJA ================= -->
+        <section id="cashier-view" class="view">
+            <div class="view-header">
+                <h2>Órdenes Listas para Cobrar</h2>
+            </div>
+            <div class="cashier-container">
+                <table class="cashier-table">
+                    <thead>
+                        <tr>
+                            <th>Orden #</th>
+                            <th>Mesa</th>
+                            <th>Detalle</th>
+                            <th>Total</th>
+                            <th>Estado</th>
+                            <th>Acción</th>
+                        </tr>
+                    </thead>
+                    <tbody id="cashier-orders-list">
+                        <!-- Filas generadas por JS -->
+                    </tbody>
+                </table>
+                <p id="cashier-empty" class="empty-state">No hay órdenes por cobrar.</p>
+            </div>
+        </section>
+
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
